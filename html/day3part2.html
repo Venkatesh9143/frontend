@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>More tags</title>
+</head>
+
+<body>
+
+    <div>
+        <h1>Lists</h1>
+        <p>Ordered and Unordered Lists</p>
+
+        <ol>
+            <li>List item 1</li>
+            <li>List item 2</li>
+        </ol>
+
+        <ul>
+            <li>List item 3</li>
+            <li>List item 4</li>
+        </ul>
+    </div>
+
+
+    <div>
+        <h1>Inputs</h1>
+
+        <form action="">
+
+            <div>
+                <!-- type: text -->
+                <label for="username">username</label>
+                <input type="text" name="username" id="username" placeholder="Type in your name" required>
+            </div>
+
+            <div>
+                <!-- type: number -->
+                <label for="age">age</label>
+                <input type="number" name="age" id="age" placeholder="Enter age" required>
+            </div>
+
+            <div>
+                <!-- type: email -->
+                <input type="email" name="email" placeholder="Enter email" required>
+            </div>
+
+            <div>
+                <!-- type: file (images and videos) -->
+                <input type="file" name="banner" accept="image/png, image/jpeg, image/avif">
+
+                <input type="file" name="reel" accept="video/mp4, video/webm, video/quicktime">
+
+                <input type="file" name="image" accept="image/*">
+            </div>
+
+            <div>
+                <!-- type: hidden -->
+                <input type="hidden" name="userId" value="12345">
+            </div>
+
+            <div>
+                <!-- type: date -->
+                <input type="date" name="DOB" required>
+            </div>
+
+            <div>
+                <input type="datetime-local" name="data-time">
+            </div>
+
+            <div>
+                <input type="color" name="color">
+            </div>
+
+            <div>
+                <input type="password" name="password" placeholder="password">
+            </div>
+
+            <div>
+                <input type="range" name="range" min="1" max="100">
+            </div>
+
+            <div>
+                <input type="search" name="search" placeholder="search">
+            </div>
+            <h4>Gender</h4>
+
+            <div>
+                <input type="radio" name="gender" value="male" id="male">
+                <label for="male">Male</label>
+
+                <input type="radio" name="gender" value="female" id="female">
+                <label for="female">Female</label>
+            </div>
+
+            <h4>favorite food</h4>
+
+
+            <div>
+                <input type="checkbox" name="food" id="biryani" value="Biryani">
+                <label for="biryani">Biryani</label>
+            </div>
+
+            <div>
+                <input type="checkbox" name="food" id="pizza" value="Pizza">
+                <label for="pizza">Pizza</label>
+            </div>
+
+            <div>
+                <input type="checkbox" name="food" id="mandi" value="Mandi">
+                <label for="mandi">Mandi</label>
+            </div>
+
+            <div>
+                <input type="checkbox" name="food" id="noodles" value="Noodles">
+                <label for="noodles">Noodles</label>
+            </div>
+
+            <button type="submit">Send form</button>
+            <input type="submit" value="Send out form">
+            <input type="reset" value="Reset form">
+            <button type="reset">Reset my form</button>
+
+        </form>
+
+    </div>
+
+
+    <div>
+        <select>
+            <option>Select state</option>
+            <option>Andhra Pradesh</option>
+            <option>Telangana</option>
+            <option>Kerala</option>
+            <option>Karnataka</option>
+            <option>Tamil Nadu</option>
+        </select>
+    </div>
+
+
+    <div>
+        <select>
+            <option value="america">America</option>
+            <option value="india">India</option>
+            <option value="england">England</option>
+        </select>
+    </div>
+
+
+    <div>
+        <h4>table</h4>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>name</th>
+                    <th>Email</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>venky</td>
+                    <td>venky@gmail.com</td>
+
+
+                </tr>
+                <tr>
+                    <td>eswar</td>
+                    <td>eswar@gmail.com</td>
+
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <th colspan="2">total names:2</td>
+                    
+                </tr>
+            </tfoot>
+        </table>
+
+
+    </div>
+
+
+</body>
+
+</html>
