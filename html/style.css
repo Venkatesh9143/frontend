@@ -1,0 +1,45 @@
+body {
+    background-color: black;
+}
+
+p {
+    background-color: orange;
+    color: white;
+    font-size: 32px;
+    font-weight: 600;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+h1 {
+    background-color: red;
+    color: white;
+}
+
+ul li {
+    background-color: blue;
+    color: aliceblue;
+    font-size: 32px;
+}
+
+div p {
+    background-color: aquamarine;
+    font-size: 32px;
+}
+
+.para {
+    background-color: green;
+    color: red;
+    font-family: 'Lucida Sans', Geneva, Verdana, sans-serif;
+}
+
+#p2 {
+    background-color: pink;
+    color: violet;
+    font-family: Cambria, Georgia, serif;
+}
+
+button {
+    background-color: red;
+    color: bisque;
+    
+}
