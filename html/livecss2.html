@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>learning flex</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;;
+            width: 100vw;
+        }
+        .container{
+            height: 90vh;
+            width:80vw;
+            border: solid black;
+            display: flex;
+            flex-direction: row;
+            flex-direction: column;
+            justify-content: start;
+            justify-content: end;
+            justify-content: center;
+            align-items: end;
+            align-items: start;
+            align-items: center;
+            gap: 16px;
+
+
+        }
+        .box{
+
+            height: 250px;
+            width:250px;
+            border: solid black;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+
+        }
+
+
+    </style>
+
+</head>
+<body>
+    <div class="container">
+    <h1>Flex and its properties</h1>
+    <div>
+        <div class="box"> <p>venky</p></div>
+    </div>
+    </div>
+    
+
+    
+</body>
+</html>
