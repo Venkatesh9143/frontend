@@ -5,6 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Travel Explore</title>
+
   <style>
     * {
       margin: 0;
@@ -12,47 +13,44 @@
       box-sizing: border-box;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      background-color: black;
+      background-color: white;
     }
 
     header {
-      background-color: white;
+      background-color: lightblue;
       height: 80px;
       width: 100%;
       padding: 0 80px;
-
       display: flex;
-     
-      
       align-items: center;
-
-      
+      justify-content: space-between;
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 1;
     }
-    .logo{
-      height: 60%;
-      
+
+    header .logo {
+      height: 60px;
     }
 
-.navbar {
-    display: inline;
-    height: 100%;
-    margin-left: 420px;
-}
+    .navbar {
+      height: 100%;
+    }
 
-
-.navbar .links-list {
-  padding-left: 0;     
-  list-style-type: lnone;
-  display: flex;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-  justify-content: end;
-}
+    .navbar .links-list {
+      list-style-type: none;
+      height: 100%;
+      display: flex;
+      align-items: center;
+    }
 
     .navbar .links-list li {
-      display: inline;
       margin: 0 20px;
     }
 
@@ -60,50 +58,167 @@
       color: black;
       text-decoration: none;
     }
+
+    main {
+      padding-top: 80px;
+      position: relative;
+    }
+
+    section {
+      scroll-margin-top: 80px;
+    }
+
+    .section-100 {
+      height: 80vh;
+    }
+
+    .queries {
+      position: absolute;
+     
+      top: 695px;
+      left:360px;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.2);
+      z-index: 2;
+    }
+
+    .section-50 {
+      height: 80vh;
+    }
+
+    #explore-section {
+      height: 80vh;
+      background: radial-gradient(red, yellow);
+      background-size: cover;
+    }
+
+    #hero-section {
+      height: 80vh;
+      background-image: url('https://th.bing.com/th/id/OIP.fMn6OTR5YD51qMwOeNAIEgHaEP?w=318&h=182&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3');
+      background-size: cover;
+    }
+
+    #travel-exp-section {
+      height: 80vh;
+      background: linear-gradient(green, yellow);
+    }
+
+    .section-50 {
+      height: 50vh;
+    }
+
+    .section-200 {
+      height: 200vh;
+    }
+
+    .whatsapp {
+      width: 60px;
+      height: 60px;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      background-image: url('https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg');
+      background-size: cover;
+    }
+    .queries1{
+        display: flex;
+        justify-content: space-between;
+        
+    }
+    .ptag{
+        padding: 5px;
+    }
+    .hred{
+       
+        color: red;
+    }
+    input{
+        padding-left: 20px;
+        height:30px
+    }
+    button{
+        background-color: green ;
+        height:30px;
+        color:white;
+    }
   </style>
 </head>
 
 <body>
+
   <header>
     <img src="https://www.travelexplorer.in/wp-content/themes/travelexplorer/images/logo-text-dark.png"
       alt="TravelExplorer" class="logo" />
 
     <nav class="navbar">
-
       <ul class="links-list">
-        <li>
-          <a href="#">
-            Home
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            About
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            Worldwide Destinations
-          </a>
-        </li>
-        <li>
-          <a href="#">
-            Hidden Himalayas (DMC)
-          </a>
-        </li>
-
-        <li>
-          <a href="#">
-            Contact us
-          </a>
-        </li>
+        <li><a href="#hero-section">Home</a></li>
+        <li><a href="#explore-section">Explore</a></li>
+        <li><a href="#travel-exp-section">Travel Explorer</a></li>
+        <li><a href="#travel-us-section">With us</a></li>
+        <li><a href="#travel-dest-section">Destination</a></li>
+        <li><a href="#help-section">Help</a></li>
       </ul>
     </nav>
   </header>
+
+  <main>
+
+    <section class="section-100" id="hero-section">
+      Hero Section
+    </section>
+
+    <div class="queries">
+
+     <div class="queries1">
+      <h3 class="htag">Submit your Queries</h3>
+      <h3 class="hred">Call: +91-9816566645, 9805374009</h3>
+     </div>
+      <p class="ptag">Get best travel deals from our expert.</p>
+      
+
+      <input type="text" name="name" id="name1" placeholder="Name">
+      <input type="email" name="email" id="email1" placeholder="Email ID">
+      <input type="number" name="mobile" id="mobile1" placeholder="Contact Number">
+      <input type="text" name="message" id="message1" placeholder="Message">
+
+      <button type="submit">ENQUIRE</button>
+    </div>
+
+    <section class="section-100" id="explore-section">
+      Lets explore
+    </section>
+
+    <section class="section-100" id="travel-exp-section">
+      We are travel explorers
+    </section>
+
+    <section class="section-100" id="travel-us-section">
+      Why travel with us
+    </section>
+
+    <section class="section-200" id="travel-dest-section">
+      Travel explorers destinations
+    </section>
+
+    <section class="section-50" id="help-2-section">
+      We can also help
+    </section>
+
+    <section class="section-100" id="help-section">
+      Client feedback
+    </section>
+
+  </main>
+
+  <div class="whatsapp"></div>
+
+  <footer>
+
+  </footer>
+
 </body>
 
 </html>
-
-
-
-
