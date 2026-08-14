@@ -4,11 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>E-Commerce Products</title>
 
     <style>
-
         body {
             font-family: Arial, sans-serif;
             text-align: center;
@@ -93,21 +91,14 @@
             margin: 20px;
             font-weight: bold;
         }
-
     </style>
-
 </head>
 
-
 <body>
-
 
     <h1>E-Commerce Products</h1>
 
     <div id="message"></div>
-
-
-  
 
     <div class="section">
 
@@ -121,33 +112,21 @@
             Add Category
         </button>
 
-        <div
-            class="categories"
-            id="categories">
-        </div>
+        <div class="categories" id="categories"></div>
 
     </div>
-
-
-
-
 
     <div class="section">
 
         <h2>Add Product</h2>
 
-
         <select id="category">
-
             <option value="">
                 Select Category
             </option>
-
         </select>
 
-
         <br>
-
 
         <input
             type="text"
@@ -155,13 +134,11 @@
             placeholder="Product title"
         >
 
-
         <input
             type="text"
             id="brand"
             placeholder="Brand"
         >
-
 
         <input
             type="number"
@@ -169,13 +146,11 @@
             placeholder="Price"
         >
 
-
         <input
             type="number"
             id="stock"
             placeholder="Stock"
         >
-
 
         <input
             type="text"
@@ -184,14 +159,11 @@
             style="width: 400px;"
         >
 
-
         <br>
-
 
         <button onclick="addProduct()">
             Add Product
         </button>
-
 
         <button onclick="getProducts()">
             Get Products
@@ -199,13 +171,9 @@
 
     </div>
 
-
-
-
     <div class="section">
 
         <h2>Update Product</h2>
-
 
         <input
             type="number"
@@ -213,21 +181,15 @@
             placeholder="Product ID"
         >
 
-
         <button onclick="updateProduct()">
             Update Product
         </button>
 
     </div>
 
-
-
-
-
     <div class="section">
 
         <h2>Delete Product</h2>
-
 
         <input
             type="number"
@@ -235,56 +197,29 @@
             placeholder="Product ID"
         >
 
-
         <button onclick="deleteProduct()">
             Delete Product
         </button>
 
     </div>
 
-
-
-
-
     <div class="section">
 
-        <div
-            class="products"
-            id="products">
-        </div>
+        <div class="products" id="products"></div>
 
     </div>
 
-
-
 <script>
-
-
-
 
 const API =
     "https://ecommerce-backend-production-b444.up.railway.app";
 
-
-
-
-
 const NO_IMAGE =
     "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Crect width='180' height='180' fill='%23eeeeee'/%3E%3Ctext x='90' y='90' text-anchor='middle' dominant-baseline='middle' font-family='Arial' font-size='14' fill='%23666666'%3ENo Image%3C/text%3E%3C/svg%3E";
 
-
-
-
-
 function showMessage(message) {
-
-    document.getElementById("message").textContent =
-        message;
-
+    document.getElementById("message").textContent = message;
 }
-
-
-
 
 async function getCategories() {
 
@@ -294,66 +229,38 @@ async function getCategories() {
             API + "/categories/"
         );
 
-
         if (!response.ok) {
-
             throw new Error(
                 "Failed to fetch categories: " +
                 response.status
             );
-
         }
-
 
         const categories =
             await response.json();
 
-
-        console.log(
-            "Categories:",
-            categories
-        );
-
-
-
-     
-
         const select =
             document.getElementById("category");
 
-
         select.innerHTML =
             '<option value="">Select Category</option>';
-
 
         categories.forEach(category => {
 
             const option =
                 document.createElement("option");
 
-
-            option.value =
-                category.id;
-
-
-            option.textContent =
-                category.name;
-
+            option.value = category.id;
+            option.textContent = category.name;
 
             select.appendChild(option);
 
         });
 
-
-
-
-
         const container =
             document.getElementById("categories");
 
-
         container.innerHTML = "";
-
 
         if (categories.length === 0) {
 
@@ -365,20 +272,14 @@ async function getCategories() {
             );
 
             return;
-
         }
-
-
 
         categories.forEach(category => {
 
             const div =
                 document.createElement("div");
 
-
-            div.className =
-                "category";
-
+            div.className = "category";
 
             div.innerHTML = `
 
@@ -403,12 +304,9 @@ async function getCategories() {
 
             `;
 
-
             container.appendChild(div);
 
         });
-
-
 
         showMessage(
             categories.length +
@@ -418,11 +316,7 @@ async function getCategories() {
     }
     catch (error) {
 
-        console.error(
-            "Error loading categories:",
-            error
-        );
-
+        console.error(error);
 
         showMessage(
             "Error loading categories."
@@ -432,65 +326,31 @@ async function getCategories() {
 
 }
 
-
-
-
-
 async function addCategory() {
 
     const name =
-        prompt(
-            "Enter category name:"
-        );
-
+        prompt("Enter category name:");
 
     if (!name) {
-
-        alert(
-            "Category name is required."
-        );
-
+        alert("Category name is required.");
         return;
-
     }
-
-
 
     const description =
-        prompt(
-            "Enter category description:"
-        );
-
+        prompt("Enter category description:");
 
     if (!description) {
-
-        alert(
-            "Category description is required."
-        );
-
+        alert("Category description is required.");
         return;
-
     }
-
-
 
     const image_url =
-        prompt(
-            "Enter category image URL:"
-        );
-
+        prompt("Enter category image URL:");
 
     if (!image_url) {
-
-        alert(
-            "Category image URL is required."
-        );
-
+        alert("Category image URL is required.");
         return;
-
     }
-
-
 
     try {
 
@@ -500,47 +360,25 @@ async function addCategory() {
                 API + "/categories/",
 
                 {
-
                     method: "POST",
 
                     headers: {
-
                         "Content-Type":
                             "application/json"
-
                     },
 
-                    body:
-                        JSON.stringify({
-
-                            name:
-                                name,
-
-                            description:
-                                description,
-
-                            image_url:
-                                image_url
-
-                        })
-
+                    body: JSON.stringify({
+                        name: name,
+                        description: description,
+                        image_url: image_url
+                    })
                 }
-
             );
-
-
 
         const data =
             await response.json();
 
-
-
         if (!response.ok) {
-
-            console.error(
-                data
-            );
-
 
             alert(
                 data.detail ||
@@ -548,25 +386,18 @@ async function addCategory() {
             );
 
             return;
-
         }
-
-
 
         alert(
             "Category added successfully!"
         );
-
 
         getCategories();
 
     }
     catch (error) {
 
-        console.error(
-            error
-        );
-
+        console.error(error);
 
         alert(
             "Error adding category."
@@ -576,17 +407,12 @@ async function addCategory() {
 
 }
 
-
-
-
-
 async function addProduct() {
 
     const categoryId =
         document
             .getElementById("category")
             .value;
-
 
     if (categoryId === "") {
 
@@ -595,10 +421,7 @@ async function addProduct() {
         );
 
         return;
-
     }
-
-
 
     const title =
         document
@@ -606,25 +429,21 @@ async function addProduct() {
             .value
             .trim();
 
-
     const brand =
         document
             .getElementById("brand")
             .value
             .trim();
 
-
     const price =
         document
             .getElementById("price")
             .value;
 
-
     const stock =
         document
             .getElementById("stock")
             .value;
-
 
     const image_url =
         document
@@ -632,65 +451,30 @@ async function addProduct() {
             .value
             .trim();
 
-
-
- 
-
     if (!title) {
-
-        alert(
-            "Enter product title."
-        );
-
+        alert("Enter product title.");
         return;
-
     }
-
 
     if (!brand) {
-
-        alert(
-            "Enter product brand."
-        );
-
+        alert("Enter product brand.");
         return;
-
     }
-
 
     if (price === "") {
-
-        alert(
-            "Enter product price."
-        );
-
+        alert("Enter product price.");
         return;
-
     }
-
 
     if (stock === "") {
-
-        alert(
-            "Enter product stock."
-        );
-
+        alert("Enter product stock.");
         return;
-
     }
-
 
     if (!image_url) {
-
-        alert(
-            "Enter product image URL."
-        );
-
+        alert("Enter product image URL.");
         return;
-
     }
-
-
 
     try {
 
@@ -700,73 +484,48 @@ async function addProduct() {
                 API + "/products/",
 
                 {
-
                     method: "POST",
 
                     headers: {
-
                         "Content-Type":
                             "application/json"
-
                     },
 
-                    body:
-                        JSON.stringify({
+                    body: JSON.stringify({
 
-                            category_id:
-                                Number(categoryId),
+                        category_id:
+                            Number(categoryId),
 
-                            title:
-                                title,
+                        title:
+                            title,
 
-                            description:
-                                title +
-                                " product",
+                        description:
+                            title + " product",
 
-                            brand:
-                                brand,
+                        brand:
+                            brand,
 
-                            image_url:
-                                image_url,
+                        image_url:
+                            image_url,
 
-                            images:
-                                [],
+                        images: [],
 
-                            specifications:
-                                {},
+                        specifications: {},
 
-                            price:
-                                Number(price),
+                        price:
+                            Number(price),
 
-                            stock:
-                                Number(stock)
+                        stock:
+                            Number(stock)
 
-                        })
-
+                    })
                 }
-
             );
-
-
 
         const data =
             await response.json();
 
-
-
-        console.log(
-            "Product response:",
-            data
-        );
-
-
-
         if (!response.ok) {
-
-            console.error(
-                data
-            );
-
 
             alert(
                 data.detail ||
@@ -774,50 +533,22 @@ async function addProduct() {
             );
 
             return;
-
         }
-
-
 
         alert(
             "Product created successfully!"
         );
 
-
-
-        // Clear inputs
-
-        document
-            .getElementById("title")
-            .value = "";
-
-
-        document
-            .getElementById("brand")
-            .value = "";
-
-
-        document
-            .getElementById("price")
-            .value = "";
-
-
-        document
-            .getElementById("stock")
-            .value = "";
-
-
-        document
-            .getElementById("image_url")
-            .value = "";
+        document.getElementById("title").value = "";
+        document.getElementById("brand").value = "";
+        document.getElementById("price").value = "";
+        document.getElementById("stock").value = "";
+        document.getElementById("image_url").value = "";
 
     }
     catch (error) {
 
-        console.error(
-            error
-        );
-
+        console.error(error);
 
         alert(
             "Error creating product."
@@ -827,18 +558,12 @@ async function addProduct() {
 
 }
 
-
-
-
 async function getProducts() {
-
-   
 
     const categoryId =
         document
             .getElementById("category")
             .value;
-
 
     if (!categoryId) {
 
@@ -847,31 +572,20 @@ async function getProducts() {
         );
 
         return;
-
     }
 
+    const container =
+        document.getElementById("products");
 
-
-    console.log(
-        "Selected Category ID:",
-        categoryId
-    );
-
-
+    container.innerHTML = "";
 
     try {
 
-    
-
         const response =
             await fetch(
-
                 API +
-                "/products/?skip=0&limit=20"
-
+                "/products/?skip=0&limit=100"
             );
-
-
 
         if (!response.ok) {
 
@@ -882,62 +596,24 @@ async function getProducts() {
 
         }
 
-
-
         const products =
             await response.json();
-
-
-
-        console.log(
-            "All Products:",
-            products
-        );
-
-
-
- 
 
         const filteredProducts =
             products.filter(product => {
 
                 const productCategoryId =
                     product.category_id ??
-                    product.categoryId;
+                    product.categoryId ??
+                    product.category?.id ??
+                    product.category?.category_id;
 
-
-                return String(
-                    productCategoryId
-                ) === String(
-                    categoryId
-                );
+                return String(productCategoryId) ===
+                    String(categoryId);
 
             });
 
-
-
-        console.log(
-            "Selected Category Products:",
-            filteredProducts
-        );
-
-
-
-
-        const container =
-            document
-                .getElementById("products");
-
-
-        container.innerHTML = "";
-
-
-
-  
-
-        if (
-            filteredProducts.length === 0
-        ) {
+        if (filteredProducts.length === 0) {
 
             container.innerHTML = `
 
@@ -957,31 +633,26 @@ async function getProducts() {
 
             `;
 
-
             showMessage(
                 "No products found for this category."
             );
 
-
             return;
-
         }
-
-
-
-       
 
         filteredProducts.forEach(product => {
 
             const div =
-                document
-                    .createElement("div");
+                document.createElement("div");
 
+            div.className = "product";
 
-            div.className =
-                "product";
-
-
+            const productCategoryId =
+                product.category_id ??
+                product.categoryId ??
+                product.category?.id ??
+                product.category?.category_id ??
+                categoryId;
 
             div.innerHTML = `
 
@@ -997,16 +668,12 @@ async function getProducts() {
 
                 <p>
                     <strong>ID:</strong>
-                    ${product.id}
+                    ${product.id ?? "N/A"}
                 </p>
 
                 <p>
                     <strong>Category ID:</strong>
-                    ${
-                        product.category_id ??
-                        product.categoryId ??
-                        "N/A"
-                    }
+                    ${productCategoryId}
                 </p>
 
                 <p>
@@ -1030,19 +697,9 @@ async function getProducts() {
 
             `;
 
-
-
-            container.appendChild(
-                div
-            );
+            container.appendChild(div);
 
         });
-
-
-
-        // ==================================================
-        // SUCCESS MESSAGE
-        // ==================================================
 
         showMessage(
             filteredProducts.length +
@@ -1052,11 +709,23 @@ async function getProducts() {
     }
     catch (error) {
 
-        console.error(
-            "Error loading products:",
-            error
-        );
+        console.error(error);
 
+        container.innerHTML = `
+
+            <div class="product">
+
+                <h3>
+                    Error Loading Products
+                </h3>
+
+                <p>
+                    ${error.message}
+                </p>
+
+            </div>
+
+        `;
 
         showMessage(
             "Error loading products."
@@ -1066,10 +735,6 @@ async function getProducts() {
 
 }
 
-
-
-
-
 async function updateProduct() {
 
     const productId =
@@ -1077,24 +742,17 @@ async function updateProduct() {
             .getElementById("updateId")
             .value;
 
-
     if (!productId) {
 
-        alert(
-            "Enter Product ID."
-        );
+        alert("Enter Product ID.");
 
         return;
-
     }
-
-
 
     const categoryId =
         document
             .getElementById("category")
             .value;
-
 
     if (!categoryId) {
 
@@ -1103,10 +761,7 @@ async function updateProduct() {
         );
 
         return;
-
     }
-
-
 
     const title =
         document
@@ -1114,33 +769,27 @@ async function updateProduct() {
             .value
             .trim();
 
-
     const brand =
         document
             .getElementById("brand")
             .value
             .trim();
 
-
     const price =
         document
             .getElementById("price")
             .value;
-
 
     const stock =
         document
             .getElementById("stock")
             .value;
 
-
     const image_url =
         document
             .getElementById("image_url")
             .value
             .trim();
-
-
 
     if (
         !title ||
@@ -1155,10 +804,7 @@ async function updateProduct() {
         );
 
         return;
-
     }
-
-
 
     try {
 
@@ -1170,66 +816,46 @@ async function updateProduct() {
                 productId,
 
                 {
-
                     method: "PUT",
 
                     headers: {
-
                         "Content-Type":
                             "application/json"
-
                     },
 
-                    body:
-                        JSON.stringify({
+                    body: JSON.stringify({
 
-                            category_id:
-                                Number(categoryId),
+                        category_id:
+                            Number(categoryId),
 
-                            title:
-                                title,
+                        title:
+                            title,
 
-                            description:
-                                title +
-                                " product",
+                        description:
+                            title + " product",
 
-                            brand:
-                                brand,
+                        brand:
+                            brand,
 
-                            image_url:
-                                image_url,
+                        image_url:
+                            image_url,
 
-                            images:
-                                [],
+                        images: [],
 
-                            specifications:
-                                {},
+                        specifications: {},
 
-                            price:
-                                Number(price),
+                        price:
+                            Number(price),
 
-                            stock:
-                                Number(stock)
+                        stock:
+                            Number(stock)
 
-                        })
-
+                    })
                 }
-
             );
-
-
 
         const data =
             await response.json();
-
-
-
-        console.log(
-            "Updated:",
-            data
-        );
-
-
 
         if (!response.ok) {
 
@@ -1239,10 +865,7 @@ async function updateProduct() {
             );
 
             return;
-
         }
-
-
 
         alert(
             "Product updated successfully!"
@@ -1251,10 +874,7 @@ async function updateProduct() {
     }
     catch (error) {
 
-        console.error(
-            error
-        );
-
+        console.error(error);
 
         alert(
             "Error updating product."
@@ -1264,17 +884,12 @@ async function updateProduct() {
 
 }
 
-
-
-
-
 async function deleteProduct() {
 
     const productId =
         document
             .getElementById("deleteId")
             .value;
-
 
     if (!productId) {
 
@@ -1283,29 +898,18 @@ async function deleteProduct() {
         );
 
         return;
-
     }
-
-
 
     const confirmDelete =
         confirm(
-
             "Are you sure you want to delete product " +
             productId +
             "?"
-
         );
 
-
-
     if (!confirmDelete) {
-
         return;
-
     }
-
-
 
     try {
 
@@ -1317,26 +921,13 @@ async function deleteProduct() {
                 productId,
 
                 {
-
                     method: "DELETE"
-
                 }
 
             );
 
-
-
         const data =
             await response.json();
-
-
-
-        console.log(
-            "Deleted:",
-            data
-        );
-
-
 
         if (!response.ok) {
 
@@ -1346,24 +937,15 @@ async function deleteProduct() {
             );
 
             return;
-
         }
-
-
 
         alert(
             "Product deleted successfully!"
         );
 
-
-
         document
             .getElementById("deleteId")
             .value = "";
-
-
-
-       
 
         document
             .getElementById("products")
@@ -1372,10 +954,7 @@ async function deleteProduct() {
     }
     catch (error) {
 
-        console.error(
-            error
-        );
-
+        console.error(error);
 
         alert(
             "Error deleting product."
