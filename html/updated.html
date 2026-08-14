@@ -1,382 +1,859 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Commerce Products</title>
+    <title>My Store</title>
 
     <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 30px;
-            background: #f5f5f5;
+            background: #f5f7fb;
+            color: #222;
         }
 
-        h1 {
-            margin-bottom: 30px;
+        header {
+            background: #ffffff;
+            border-bottom: 1px solid #e5e7eb;
+            padding: 16px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        h2 {
-            margin-top: 30px;
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #111827;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: 10px;
         }
 
         button {
-            padding: 12px 20px;
-            margin: 5px;
-            font-size: 16px;
-            cursor: pointer;
             border: none;
-            border-radius: 6px;
-            background: #222;
+            cursor: pointer;
+            border-radius: 8px;
+            padding: 11px 18px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .add-category {
+            background: #eef2ff;
+            color: #4338ca;
+        }
+
+        .add-product {
+            background: #111827;
             color: white;
         }
 
         button:hover {
-            background: #555;
+            opacity: 0.9;
         }
 
-        select,
-        input {
-            padding: 10px;
-            margin: 5px;
-            font-size: 16px;
-            border: 1px solid #aaa;
-            border-radius: 5px;
+        .container {
+            width: 90%;
+            max-width: 1400px;
+            margin: 30px auto;
         }
 
-        .categories,
-        .products {
-            margin-top: 30px;
+        .page-title {
+            margin-bottom: 8px;
+            font-size: 28px;
+        }
+
+        .page-subtitle {
+            color: #6b7280;
+            margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 21px;
+            margin-bottom: 16px;
+        }
+
+        .categories {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
+            gap: 14px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            margin-bottom: 35px;
+        }
+
+        .categories::-webkit-scrollbar {
+            height: 5px;
+        }
+
+        .categories::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 10px;
+        }
+
+        .category {
+            min-width: 150px;
+            background: white;
+            border: 1px solid #e5e7eb;
+            border-radius: 12px;
+            padding: 12px;
+            cursor: pointer;
+            text-align: center;
+            transition: 0.2s;
+        }
+
+        .category:hover {
+            transform: translateY(-2px);
+            border-color: #111827;
+        }
+
+        .category.active {
+            border: 2px solid #111827;
+            background: #f9fafb;
+        }
+
+        .category img {
+            width: 100px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 8px;
+        }
+
+        .category h3 {
+            font-size: 15px;
+        }
+
+        .products-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 18px;
+        }
+
+        .selected-category {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .products {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(230px, 1fr));
             gap: 20px;
         }
 
-        .category,
         .product {
-            width: 220px;
-            padding: 15px;
-            border: 1px solid #ccc;
-            border-radius: 10px;
             background: white;
-            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 14px;
+            overflow: hidden;
+            border: 1px solid #e5e7eb;
+            cursor: pointer;
+            transition: 0.25s;
         }
 
-        .category img,
-        .product img {
-            width: 180px;
-            height: 180px;
+        .product:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.08);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 210px;
             object-fit: cover;
-            border-radius: 8px;
+            background: #f3f4f6;
         }
 
-        .category h3,
-        .product h3 {
-            margin: 10px 0;
+        .product-content {
+            padding: 16px;
         }
 
-        .category p,
-        .product p {
-            margin: 6px 0;
+        .product-title {
+            font-size: 17px;
+            margin-bottom: 7px;
         }
 
-        .section {
-            margin-bottom: 40px;
+        .product-brand {
+            color: #6b7280;
+            font-size: 13px;
+            margin-bottom: 12px;
         }
 
-        #message {
-            margin: 20px;
+        .product-price {
+            font-size: 19px;
             font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        .product-stock {
+            font-size: 13px;
+            color: #16a34a;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 60px 20px;
+            color: #6b7280;
+            background: white;
+            border-radius: 14px;
+            border: 1px solid #e5e7eb;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #6b7280;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.55);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-box {
+            width: 100%;
+            max-width: 700px;
+            max-height: 90vh;
+            overflow-y: auto;
+            background: white;
+            border-radius: 16px;
+            padding: 25px;
+            position: relative;
+        }
+
+        .close {
+            position: absolute;
+            right: 18px;
+            top: 15px;
+            background: #f3f4f6;
+            color: #111827;
+            border-radius: 50%;
+            width: 35px;
+            height: 35px;
+            padding: 0;
+            font-size: 18px;
+        }
+
+        .modal-title {
+            font-size: 22px;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #d1d5db;
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            border-color: #111827;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background: #111827;
+            color: white;
+            margin-top: 8px;
+        }
+
+        .details {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .details-image {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 12px;
+            background: #f3f4f6;
+        }
+
+        .details-info {
+            padding: 10px 0;
+        }
+
+        .details-info h2 {
+            font-size: 26px;
+            margin-bottom: 10px;
+        }
+
+        .details-brand {
+            color: #6b7280;
+            margin-bottom: 20px;
+        }
+
+        .details-price {
+            font-size: 26px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .details-description {
+            color: #4b5563;
+            line-height: 1.6;
+            margin-bottom: 15px;
+        }
+
+        .details-stock {
+            margin-bottom: 20px;
+            color: #16a34a;
+        }
+
+        .back-btn {
+            background: #f3f4f6;
+            color: #111827;
+        }
+
+        .message {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            background: #111827;
+            color: white;
+            padding: 14px 20px;
+            border-radius: 10px;
+            display: none;
+            z-index: 500;
+        }
+
+        @media (max-width: 700px) {
+            header {
+                padding: 14px 4%;
+            }
+
+            .logo {
+                font-size: 20px;
+            }
+
+            .header-actions button {
+                padding: 9px 10px;
+                font-size: 12px;
+            }
+
+            .container {
+                width: 92%;
+            }
+
+            .details {
+                grid-template-columns: 1fr;
+            }
+
+            .details-image {
+                height: 280px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <h1>E-Commerce Products</h1>
+<header>
+    <div class="logo">🛍️ My Store</div>
 
-    <div id="message"></div>
-
-    <div class="section">
-
-        <h2>Categories</h2>
-
-        <button onclick="getCategories()">
-            Get Categories
+    <div class="header-actions">
+        <button class="add-category" onclick="openAddCategory()">
+            + Add Category
         </button>
 
-        <button onclick="addCategory()">
+        <button class="add-product" onclick="openAddProduct()">
+            + Add Product
+        </button>
+    </div>
+</header>
+
+<main class="container">
+
+    <h1 class="page-title">Explore Products</h1>
+    <p class="page-subtitle">Choose a category to discover products</p>
+
+    <h2 class="section-title">Categories</h2>
+
+    <div class="categories" id="categories">
+        <div class="loading">Loading categories...</div>
+    </div>
+
+    <div class="products-header">
+        <div>
+            <h2 class="section-title" id="productsTitle">
+                Products
+            </h2>
+            <div class="selected-category" id="selectedCategory">
+                Select a category
+            </div>
+        </div>
+    </div>
+
+    <div class="products" id="products">
+        <div class="empty">
+            <h3>Select a category</h3>
+            <p>Products will appear here.</p>
+        </div>
+    </div>
+
+</main>
+
+<div class="modal" id="categoryModal">
+
+    <div class="modal-box">
+
+        <button class="close" onclick="closeModal('categoryModal')">
+            ×
+        </button>
+
+        <h2 class="modal-title">Add Category</h2>
+
+        <div class="form-group">
+            <label>Category Name</label>
+            <input type="text" id="categoryName" placeholder="Enter category name">
+        </div>
+
+        <div class="form-group">
+            <label>Description</label>
+            <input type="text" id="categoryDescription" placeholder="Enter description">
+        </div>
+
+        <div class="form-group">
+            <label>Image URL</label>
+            <input type="text" id="categoryImage" placeholder="Enter image URL">
+        </div>
+
+        <button class="submit-btn" onclick="addCategory()">
             Add Category
         </button>
 
-        <div class="categories" id="categories"></div>
-
     </div>
 
-    <div class="section">
+</div>
 
-        <h2>Add Product</h2>
+<div class="modal" id="productModal">
 
-        <select id="category">
-            <option value="">
-                Select Category
-            </option>
-        </select>
+    <div class="modal-box">
 
-        <br>
+        <button class="close" onclick="closeModal('productModal')">
+            ×
+        </button>
 
-        <input
-            type="text"
-            id="title"
-            placeholder="Product title"
-        >
+        <h2 class="modal-title">Add Product</h2>
 
-        <input
-            type="text"
-            id="brand"
-            placeholder="Brand"
-        >
+        <div class="form-group">
+            <label>Category</label>
+            <select id="category">
+                <option value="">Select Category</option>
+            </select>
+        </div>
 
-        <input
-            type="number"
-            id="price"
-            placeholder="Price"
-        >
+        <div class="form-group">
+            <label>Product Title</label>
+            <input type="text" id="title" placeholder="Enter product title">
+        </div>
 
-        <input
-            type="number"
-            id="stock"
-            placeholder="Stock"
-        >
+        <div class="form-group">
+            <label>Brand</label>
+            <input type="text" id="brand" placeholder="Enter brand">
+        </div>
 
-        <input
-            type="text"
-            id="image_url"
-            placeholder="Image URL"
-            style="width: 400px;"
-        >
+        <div class="form-group">
+            <label>Price</label>
+            <input type="number" id="price" placeholder="Enter price">
+        </div>
 
-        <br>
+        <div class="form-group">
+            <label>Stock</label>
+            <input type="number" id="stock" placeholder="Enter stock">
+        </div>
 
-        <button onclick="addProduct()">
+        <div class="form-group">
+            <label>Image URL</label>
+            <input type="text" id="image_url" placeholder="Enter image URL">
+        </div>
+
+        <button class="submit-btn" onclick="addProduct()">
             Add Product
         </button>
 
-        <button onclick="getProducts()">
-            Get Products
+    </div>
+
+</div>
+
+<div class="modal" id="detailsModal">
+
+    <div class="modal-box">
+
+        <button class="close" onclick="closeModal('detailsModal')">
+            ×
         </button>
 
-    </div>
-
-    <div class="section">
-
-        <h2>Update Product</h2>
-
-        <input
-            type="number"
-            id="updateId"
-            placeholder="Product ID"
-        >
-
-        <button onclick="updateProduct()">
-            Update Product
-        </button>
+        <div id="productDetails"></div>
 
     </div>
 
-    <div class="section">
+</div>
 
-        <h2>Delete Product</h2>
-
-        <input
-            type="number"
-            id="deleteId"
-            placeholder="Product ID"
-        >
-
-        <button onclick="deleteProduct()">
-            Delete Product
-        </button>
-
-    </div>
-
-    <div class="section">
-
-        <div class="products" id="products"></div>
-
-    </div>
+<div class="message" id="message"></div>
 
 <script>
 
-const API =
-    "https://ecommerce-backend-production-b444.up.railway.app";
+const API = "https://ecommerce-backend-production-b444.up.railway.app";
 
-const NO_IMAGE =
-    "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Crect width='180' height='180' fill='%23eeeeee'/%3E%3Ctext x='90' y='90' text-anchor='middle' dominant-baseline='middle' font-family='Arial' font-size='14' fill='%23666666'%3ENo Image%3C/text%3E%3C/svg%3E";
+let categoriesData = [];
+let currentCategoryId = null;
 
-function showMessage(message) {
-    document.getElementById("message").textContent = message;
+function showMessage(text) {
+    const message = document.getElementById("message");
+
+    message.textContent = text;
+    message.style.display = "block";
+
+    setTimeout(() => {
+        message.style.display = "none";
+    }, 2500);
+}
+
+function openModal(id) {
+    document.getElementById(id).classList.add("show");
+}
+
+function closeModal(id) {
+    document.getElementById(id).classList.remove("show");
+}
+
+function openAddCategory() {
+    alert("Please log in first to add categories.");
+}
+
+function openAddProduct() {
+    alert("Please log in first to add products.");
 }
 
 async function getCategories() {
 
+    const container = document.getElementById("categories");
+
     try {
 
-        const response = await fetch(
-            API + "/categories/"
-        );
+        const response = await fetch(API + "/categories/");
 
         if (!response.ok) {
-            throw new Error(
-                "Failed to fetch categories: " +
-                response.status
-            );
+            throw new Error("Failed to load categories");
         }
 
-        const categories =
-            await response.json();
-
-        const select =
-            document.getElementById("category");
-
-        select.innerHTML =
-            '<option value="">Select Category</option>';
-
-        categories.forEach(category => {
-
-            const option =
-                document.createElement("option");
-
-            option.value = category.id;
-            option.textContent = category.name;
-
-            select.appendChild(option);
-
-        });
-
-        const container =
-            document.getElementById("categories");
+        categoriesData = await response.json();
 
         container.innerHTML = "";
 
-        if (categories.length === 0) {
-
-            container.innerHTML =
-                "<p>No categories found.</p>";
-
-            showMessage(
-                "No categories found."
-            );
-
+        if (categoriesData.length === 0) {
+            container.innerHTML = `
+                <div class="empty">
+                    <h3>No categories available</h3>
+                </div>
+            `;
             return;
         }
 
-        categories.forEach(category => {
+        categoriesData.forEach(category => {
 
-            const div =
-                document.createElement("div");
+            const div = document.createElement("div");
 
             div.className = "category";
 
             div.innerHTML = `
-
-                <img
-                    src="${category.image_url || NO_IMAGE}"
-                    alt="${category.name || "Category"}"
-                    onerror="this.onerror=null;this.src=NO_IMAGE;"
+                <img 
+                    src="${category.image_url || 'https://via.placeholder.com/180'}"
+                    alt="${category.name}"
                 >
-
-                <h3>
-                    ${category.name || "No Name"}
-                </h3>
-
-                <p>
-                    <strong>ID:</strong>
-                    ${category.id}
-                </p>
-
-                <p>
-                    ${category.description || ""}
-                </p>
-
+                <h3>${category.name}</h3>
             `;
+
+            div.onclick = () => {
+                selectCategory(category.id, category.name, div);
+            };
 
             container.appendChild(div);
 
         });
 
-        showMessage(
-            categories.length +
-            " categories loaded."
-        );
-
-    }
-    catch (error) {
+    } catch (error) {
 
         console.error(error);
 
-        showMessage(
-            "Error loading categories."
-        );
+        container.innerHTML = `
+            <div class="empty">
+                <h3>Unable to load categories</h3>
+                <p>Please try again later.</p>
+            </div>
+        `;
 
     }
+}
 
+async function selectCategory(categoryId, categoryName, element) {
+
+    currentCategoryId = categoryId;
+
+    document.querySelectorAll(".category").forEach(item => {
+        item.classList.remove("active");
+    });
+
+    element.classList.add("active");
+
+    document.getElementById("productsTitle").textContent =
+        categoryName + " Products";
+
+    document.getElementById("selectedCategory").textContent =
+        "Products in " + categoryName;
+
+    await getProductsByCategory(categoryId);
+
+}
+
+async function getProductsByCategory(categoryId) {
+
+    const container = document.getElementById("products");
+
+    container.innerHTML = `
+        <div class="loading">
+            Loading products...
+        </div>
+    `;
+
+    try {
+
+        const response = await fetch(
+            API + `/products/?skip=0&limit=100`
+        );
+
+        if (!response.ok) {
+            throw new Error("Failed to load products");
+        }
+
+        const products = await response.json();
+
+        const filteredProducts = products.filter(
+            product => Number(product.category_id) === Number(categoryId)
+        );
+
+        container.innerHTML = "";
+
+        if (filteredProducts.length === 0) {
+
+            container.innerHTML = `
+                <div class="empty">
+                    <h3>No products found</h3>
+                    <p>There are no products in this category yet.</p>
+                </div>
+            `;
+
+            return;
+        }
+
+        filteredProducts.forEach(product => {
+
+            const div = document.createElement("div");
+
+            div.className = "product";
+
+            div.innerHTML = `
+                <img
+                    class="product-image"
+                    src="${product.image_url || 'https://via.placeholder.com/400'}"
+                    alt="${product.title}"
+                >
+
+                <div class="product-content">
+
+                    <h3 class="product-title">
+                        ${product.title}
+                    </h3>
+
+                    <p class="product-brand">
+                        ${product.brand || "No brand"}
+                    </p>
+
+                    <p class="product-price">
+                        ₹${product.price}
+                    </p>
+
+                    <p class="product-stock">
+                        ${product.stock > 0
+                            ? product.stock + " items available"
+                            : "Out of stock"}
+                    </p>
+
+                </div>
+            `;
+
+            div.onclick = () => {
+                showProductDetails(product);
+            };
+
+            container.appendChild(div);
+
+        });
+
+    } catch (error) {
+
+        console.error(error);
+
+        container.innerHTML = `
+            <div class="empty">
+                <h3>Unable to load products</h3>
+                <p>Please try again later.</p>
+            </div>
+        `;
+
+    }
+}
+
+function showProductDetails(product) {
+
+    const container = document.getElementById("productDetails");
+
+    container.innerHTML = `
+        <div class="details">
+
+            <div>
+                <img
+                    class="details-image"
+                    src="${product.image_url || 'https://via.placeholder.com/500'}"
+                    alt="${product.title}"
+                >
+            </div>
+
+            <div class="details-info">
+
+                <h2>${product.title}</h2>
+
+                <p class="details-brand">
+                    ${product.brand || "No brand"}
+                </p>
+
+                <p class="details-price">
+                    ₹${product.price}
+                </p>
+
+                <p class="details-description">
+                    ${product.description || "No description available."}
+                </p>
+
+                <p class="details-stock">
+                    ${product.stock > 0
+                        ? product.stock + " items available"
+                        : "Out of stock"}
+                </p>
+
+                <button class="back-btn" onclick="closeModal('detailsModal')">
+                    Back to Products
+                </button>
+
+            </div>
+
+        </div>
+    `;
+
+    openModal("detailsModal");
+}
+
+function fillCategorySelect() {
+
+    const select = document.getElementById("category");
+
+    select.innerHTML =
+        '<option value="">Select Category</option>';
+
+    categoriesData.forEach(category => {
+
+        const option = document.createElement("option");
+
+        option.value = category.id;
+        option.textContent = category.name;
+
+        select.appendChild(option);
+
+    });
 }
 
 async function addCategory() {
 
     const name =
-        prompt("Enter category name:");
-
-    if (!name) {
-        alert("Category name is required.");
-        return;
-    }
+        document.getElementById("categoryName").value.trim();
 
     const description =
-        prompt("Enter category description:");
+        document.getElementById("categoryDescription").value.trim();
 
-    if (!description) {
-        alert("Category description is required.");
+    const image_url =
+        document.getElementById("categoryImage").value.trim();
+
+    if (!name) {
+        alert("Enter category name.");
         return;
     }
 
-    const image_url =
-        prompt("Enter category image URL:");
+    if (!description) {
+        alert("Enter category description.");
+        return;
+    }
 
     if (!image_url) {
-        alert("Category image URL is required.");
+        alert("Enter category image URL.");
         return;
     }
 
     try {
 
-        const response =
-            await fetch(
+        const response = await fetch(
+            API + "/categories/",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    name,
+                    description,
+                    image_url
+                })
+            }
+        );
 
-                API + "/categories/",
-
-                {
-                    method: "POST",
-
-                    headers: {
-                        "Content-Type":
-                            "application/json"
-                    },
-
-                    body: JSON.stringify({
-                        name: name,
-                        description: description,
-                        image_url: image_url
-                    })
-                }
-            );
-
-        const data =
-            await response.json();
+        const data = await response.json();
 
         if (!response.ok) {
 
@@ -388,68 +865,49 @@ async function addCategory() {
             return;
         }
 
-        alert(
-            "Category added successfully!"
-        );
+        alert("Category added successfully.");
 
-        getCategories();
+        document.getElementById("categoryName").value = "";
+        document.getElementById("categoryDescription").value = "";
+        document.getElementById("categoryImage").value = "";
 
-    }
-    catch (error) {
+        closeModal("categoryModal");
+
+        await getCategories();
+
+    } catch (error) {
 
         console.error(error);
 
-        alert(
-            "Error adding category."
-        );
+        alert("Error adding category.");
 
     }
-
 }
 
 async function addProduct() {
 
     const categoryId =
-        document
-            .getElementById("category")
-            .value;
-
-    if (categoryId === "") {
-
-        alert(
-            "First click 'Get Categories' and select a category."
-        );
-
-        return;
-    }
+        document.getElementById("category").value;
 
     const title =
-        document
-            .getElementById("title")
-            .value
-            .trim();
+        document.getElementById("title").value.trim();
 
     const brand =
-        document
-            .getElementById("brand")
-            .value
-            .trim();
+        document.getElementById("brand").value.trim();
 
     const price =
-        document
-            .getElementById("price")
-            .value;
+        document.getElementById("price").value;
 
     const stock =
-        document
-            .getElementById("stock")
-            .value;
+        document.getElementById("stock").value;
 
     const image_url =
-        document
-            .getElementById("image_url")
-            .value
-            .trim();
+        document.getElementById("image_url").value.trim();
+
+    if (!categoryId) {
+        alert("Select a category.");
+        return;
+    }
 
     if (!title) {
         alert("Enter product title.");
@@ -478,52 +936,28 @@ async function addProduct() {
 
     try {
 
-        const response =
-            await fetch(
+        const response = await fetch(
+            API + "/products/",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    category_id: Number(categoryId),
+                    title: title,
+                    description: title + " product",
+                    brand: brand,
+                    image_url: image_url,
+                    images: [],
+                    specifications: {},
+                    price: Number(price),
+                    stock: Number(stock)
+                })
+            }
+        );
 
-                API + "/products/",
-
-                {
-                    method: "POST",
-
-                    headers: {
-                        "Content-Type":
-                            "application/json"
-                    },
-
-                    body: JSON.stringify({
-
-                        category_id:
-                            Number(categoryId),
-
-                        title:
-                            title,
-
-                        description:
-                            title + " product",
-
-                        brand:
-                            brand,
-
-                        image_url:
-                            image_url,
-
-                        images: [],
-
-                        specifications: {},
-
-                        price:
-                            Number(price),
-
-                        stock:
-                            Number(stock)
-
-                    })
-                }
-            );
-
-        const data =
-            await response.json();
+        const data = await response.json();
 
         if (!response.ok) {
 
@@ -535,9 +969,7 @@ async function addProduct() {
             return;
         }
 
-        alert(
-            "Product created successfully!"
-        );
+        alert("Product created successfully.");
 
         document.getElementById("title").value = "";
         document.getElementById("brand").value = "";
@@ -545,427 +977,44 @@ async function addProduct() {
         document.getElementById("stock").value = "";
         document.getElementById("image_url").value = "";
 
-    }
-    catch (error) {
+        closeModal("productModal");
+
+        if (currentCategoryId) {
+            const category = categoriesData.find(
+                item => Number(item.id) === Number(currentCategoryId)
+            );
+
+            if (category) {
+                await getProductsByCategory(currentCategoryId);
+            }
+        }
+
+    } catch (error) {
 
         console.error(error);
 
-        alert(
-            "Error creating product."
-        );
+        alert("Error creating product.");
 
     }
-
 }
 
-async function getProducts() {
+window.addEventListener("DOMContentLoaded", async () => {
 
-    const categoryId =
-        document
-            .getElementById("category")
-            .value;
+    await getCategories();
 
-    if (!categoryId) {
+    fillCategorySelect();
 
-        alert(
-            "Please select a category first."
-        );
+});
 
-        return;
+window.addEventListener("click", event => {
+
+    if (event.target.classList.contains("modal")) {
+        event.target.classList.remove("show");
     }
 
-    const container =
-        document.getElementById("products");
-
-    container.innerHTML = "";
-
-    try {
-
-        const response =
-            await fetch(
-                API +
-                "/products/?skip=0&limit=100"
-            );
-
-        if (!response.ok) {
-
-            throw new Error(
-                "Failed to fetch products: " +
-                response.status
-            );
-
-        }
-
-        const products =
-            await response.json();
-
-        const filteredProducts =
-            products.filter(product => {
-
-                const productCategoryId =
-                    product.category_id ??
-                    product.categoryId ??
-                    product.category?.id ??
-                    product.category?.category_id;
-
-                return String(productCategoryId) ===
-                    String(categoryId);
-
-            });
-
-        if (filteredProducts.length === 0) {
-
-            container.innerHTML = `
-
-                <div class="product">
-
-                    <h3>
-                        No Products Found
-                    </h3>
-
-                    <p>
-                        No products found for
-                        Category ID:
-                        ${categoryId}
-                    </p>
-
-                </div>
-
-            `;
-
-            showMessage(
-                "No products found for this category."
-            );
-
-            return;
-        }
-
-        filteredProducts.forEach(product => {
-
-            const div =
-                document.createElement("div");
-
-            div.className = "product";
-
-            const productCategoryId =
-                product.category_id ??
-                product.categoryId ??
-                product.category?.id ??
-                product.category?.category_id ??
-                categoryId;
-
-            div.innerHTML = `
-
-                <img
-                    src="${product.image_url || NO_IMAGE}"
-                    alt="${product.title || "Product"}"
-                    onerror="this.onerror=null;this.src=NO_IMAGE;"
-                >
-
-                <h3>
-                    ${product.title || "No Title"}
-                </h3>
-
-                <p>
-                    <strong>ID:</strong>
-                    ${product.id ?? "N/A"}
-                </p>
-
-                <p>
-                    <strong>Category ID:</strong>
-                    ${productCategoryId}
-                </p>
-
-                <p>
-                    <strong>Brand:</strong>
-                    ${product.brand || "N/A"}
-                </p>
-
-                <p>
-                    <strong>Price:</strong>
-                    ₹${product.price ?? 0}
-                </p>
-
-                <p>
-                    <strong>Stock:</strong>
-                    ${product.stock ?? 0}
-                </p>
-
-                <p>
-                    ${product.description || ""}
-                </p>
-
-            `;
-
-            container.appendChild(div);
-
-        });
-
-        showMessage(
-            filteredProducts.length +
-            " products loaded."
-        );
-
-    }
-    catch (error) {
-
-        console.error(error);
-
-        container.innerHTML = `
-
-            <div class="product">
-
-                <h3>
-                    Error Loading Products
-                </h3>
-
-                <p>
-                    ${error.message}
-                </p>
-
-            </div>
-
-        `;
-
-        showMessage(
-            "Error loading products."
-        );
-
-    }
-
-}
-
-async function updateProduct() {
-
-    const productId =
-        document
-            .getElementById("updateId")
-            .value;
-
-    if (!productId) {
-
-        alert("Enter Product ID.");
-
-        return;
-    }
-
-    const categoryId =
-        document
-            .getElementById("category")
-            .value;
-
-    if (!categoryId) {
-
-        alert(
-            "First click Get Categories and select a category."
-        );
-
-        return;
-    }
-
-    const title =
-        document
-            .getElementById("title")
-            .value
-            .trim();
-
-    const brand =
-        document
-            .getElementById("brand")
-            .value
-            .trim();
-
-    const price =
-        document
-            .getElementById("price")
-            .value;
-
-    const stock =
-        document
-            .getElementById("stock")
-            .value;
-
-    const image_url =
-        document
-            .getElementById("image_url")
-            .value
-            .trim();
-
-    if (
-        !title ||
-        !brand ||
-        price === "" ||
-        stock === "" ||
-        !image_url
-    ) {
-
-        alert(
-            "Fill all product fields before updating."
-        );
-
-        return;
-    }
-
-    try {
-
-        const response =
-            await fetch(
-
-                API +
-                "/products/" +
-                productId,
-
-                {
-                    method: "PUT",
-
-                    headers: {
-                        "Content-Type":
-                            "application/json"
-                    },
-
-                    body: JSON.stringify({
-
-                        category_id:
-                            Number(categoryId),
-
-                        title:
-                            title,
-
-                        description:
-                            title + " product",
-
-                        brand:
-                            brand,
-
-                        image_url:
-                            image_url,
-
-                        images: [],
-
-                        specifications: {},
-
-                        price:
-                            Number(price),
-
-                        stock:
-                            Number(stock)
-
-                    })
-                }
-            );
-
-        const data =
-            await response.json();
-
-        if (!response.ok) {
-
-            alert(
-                data.detail ||
-                "Failed to update product."
-            );
-
-            return;
-        }
-
-        alert(
-            "Product updated successfully!"
-        );
-
-    }
-    catch (error) {
-
-        console.error(error);
-
-        alert(
-            "Error updating product."
-        );
-
-    }
-
-}
-
-async function deleteProduct() {
-
-    const productId =
-        document
-            .getElementById("deleteId")
-            .value;
-
-    if (!productId) {
-
-        alert(
-            "Enter Product ID."
-        );
-
-        return;
-    }
-
-    const confirmDelete =
-        confirm(
-            "Are you sure you want to delete product " +
-            productId +
-            "?"
-        );
-
-    if (!confirmDelete) {
-        return;
-    }
-
-    try {
-
-        const response =
-            await fetch(
-
-                API +
-                "/products/" +
-                productId,
-
-                {
-                    method: "DELETE"
-                }
-
-            );
-
-        const data =
-            await response.json();
-
-        if (!response.ok) {
-
-            alert(
-                data.detail ||
-                "Failed to delete product."
-            );
-
-            return;
-        }
-
-        alert(
-            "Product deleted successfully!"
-        );
-
-        document
-            .getElementById("deleteId")
-            .value = "";
-
-        document
-            .getElementById("products")
-            .innerHTML = "";
-
-    }
-    catch (error) {
-
-        console.error(error);
-
-        alert(
-            "Error deleting product."
-        );
-
-    }
-
-}
+});
 
 </script>
 
 </body>
-
 </html>
